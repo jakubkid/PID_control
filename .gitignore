@@ -1,0 +1,8 @@
+.vscode
+build
+tags
+.editorconfig
+# build files
+build/
+VisualStudio/x64
+VisualStudio/.vs
