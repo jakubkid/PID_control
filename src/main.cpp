@@ -36,7 +36,7 @@ int main()
   PID steerControler;
   PID speedControler;
   // Initialize the PID.
-  steerControler.Init(0.15, 0.004, 3.0);
+  steerControler.Init(0.10, 0, 1.4); // PD only
   speedControler.Init(0.04, 0, 0.0); // target is moving use only P
 
   h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> *ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -74,7 +74,7 @@ int main()
 		  /*
 		  * Calcuate speed value here, speed value is [-1, 1]
 		  */
-		  double speedGoal = 80 * (1 - abs(steerValue)); // speed is proportional to how far our seering angle is from the middle
+		  double speedGoal = 100 * (1 - abs(steerValue)); // speed is proportional to how far our seering angle is from the middle
 		  speedControler.UpdateError(speed - speedGoal); // speed is proportional to how far our seering angle is from middle
 		  throttleValue = speedControler.TotalError();
 		  if (throttleValue > 1.0)
