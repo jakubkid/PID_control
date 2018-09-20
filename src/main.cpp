@@ -74,8 +74,12 @@ int main()
 		  /*
 		  * Calcuate speed value here, speed value is [-1, 1]
 		  */
-		  double speedGoal = 100 * (1 - abs(steerValue)); // speed is proportional to how far our seering angle is from the middle
-		  speedControler.UpdateError(speed - speedGoal); // speed is proportional to how far our seering angle is from middle
+		  double speedGoal = 10 * (12 - abs(angle)); // speed is proportional to how far our seering value is from the max to make car a bit more linear
+		  if (speedGoal < 1.0)
+		  {
+			  speedGoal = 1.0;
+		  }
+		  speedControler.UpdateError(speed - speedGoal);
 		  throttleValue = speedControler.TotalError();
 		  if (throttleValue > 1.0)
 		  {
