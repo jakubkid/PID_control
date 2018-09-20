@@ -36,7 +36,7 @@ int main()
   PID steerControler;
   PID speedControler;
   // Initialize the PID.
-  steerControler.Init(0.10, 0, 1.4); // PD only
+  steerControler.Init(0.10, 0, 1.5); // PD only
   speedControler.Init(0.04, 0, 0.0); // target is moving use only P
 
   h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> *ws, char *data, size_t length, uWS::OpCode opCode) {
