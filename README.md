@@ -19,16 +19,6 @@ Second controller is responsible for tuning speed based on current steering angl
 
 Hyperparameter selection was done manually. First only steer value controller was used with P value until the car was able to complete some turns but was oscillating a lot, next D term was added which helped a lot with oscillations. P term of speed controller was added to increase the speed on straight and was selected to be quite gentle. 
 Describe the effect each of the P, I, D components had in your implementation. For results either run the code or check this [video](https://github.com/jakubkid/PID_control/blob/master/video/fullRun.wmv)
-	
-
-Student describes the effect of the P, I, D component of the PID algorithm in their implementation. Is it what you expected?
-
-Visual aids are encouraged, i.e. record of a small video of the car in the simulator and describe what each component is set to.
-
-Describe how the final hyperparameters were chosen.
-	
-
-Student discusses how they chose the final hyperparameters (P, I, D coefficients). This could be have been done through manual tuning, twiddle, SGD, or something else, or a combination!
 
 ## Dependencies
 
