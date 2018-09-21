@@ -18,7 +18,7 @@ In the implementation 2 controllers were used. 1st is PD controlled which regula
 Second controller is responsible for tuning speed based on current steering angle. It only uses P component because its set point is changed very rapidly and would cause D component to over react likewise steer value controller it doesn't need to cancel out the error completely.
 
 Hyperparameter selection was done manually. First only steer value controller was used with P value until the car was able to complete some turns but was oscillating a lot, next D term was added which helped a lot with oscillations. P term of speed controller was added to increase the speed on straight and was selected to be quite gentle. 
-Describe the effect each of the P, I, D components had in your implementation. For results either run the code or check this [video](PID_control/video/fullRun.wmv)
+Describe the effect each of the P, I, D components had in your implementation. For results either run the code or check this [video](https://github.com/jakubkid/PID_control/blob/master/video/fullRun.wmv)
 	
 
 Student describes the effect of the P, I, D component of the PID algorithm in their implementation. Is it what you expected?
