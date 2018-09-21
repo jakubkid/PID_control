@@ -1,17 +1,34 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
-
+## Intro
 Solution based on template From [repository] (https://github.com/udacity/CarND-PID-Control-Project)
-The solution utilizes PID controler to control car steering and speed to complete the track. 
+The solution utilizes PID controller to control car steering and speed to complete the track. 
 
 The desired track and error from it are generated with [Simulator](https://github.com/udacity/self-driving-car-sim/releases)
 
-Comunication with simulator is done with [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) which can be installed on [Linux](install-ubuntu.sh) and [Mac](install-mac.sh). 
+Communication with simulator is done with [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) which can be installed on [Linux](install-ubuntu.sh) and [Mac](install-mac.sh). 
 Development on Windows is possible in Visual Studio using [vcpkg](https://github.com/fkeidel/CarND-Term2-ide-profile-VisualStudio/tree/master/VisualStudio). You can also use emulator like Docker, VMware, or [Windows 10 Bash on Ubuntu](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).
 
 Once the install for uWebSocketIO is complete, the main program can be built and run by doing the following from the project top directory. 
 Visual studio was used to compile the code.
 
+## Reflection
+
+In the implementation 2 controllers were used. 1st is PD controlled which regulates steer value based on cte error received from simulator. PD controller was selected because when driving the car desired position changes and it is not so important to cancel out the error.
+Second controller is responsible for tuning speed based on current steering angle. It only uses P component because its set point is changed very rapidly and would cause D component to over react likewise steer value controller it doesn't need to cancel out the error completely.
+
+Hyperparameter selection was done manually. First only steer value controller was used with P value until the car was able to complete some turns but was oscillating a lot, next D term was added which helped a lot with oscillations. P term of speed controller was added to increase the speed on straight and was selected to be quite gentle. 
+Describe the effect each of the P, I, D components had in your implementation. For results either run the code or check this [video](PID_control/video/fullRun.wmv)
+	
+
+Student describes the effect of the P, I, D component of the PID algorithm in their implementation. Is it what you expected?
+
+Visual aids are encouraged, i.e. record of a small video of the car in the simulator and describe what each component is set to.
+
+Describe how the final hyperparameters were chosen.
+	
+
+Student discusses how they chose the final hyperparameters (P, I, D coefficients). This could be have been done through manual tuning, twiddle, SGD, or something else, or a combination!
 
 ## Dependencies
 
