@@ -38,8 +38,12 @@ int main()
   // Initialize the PID.
   steerControler.Init(0.10, 0, 1.5); // PD only
   speedControler.Init(0.04, 0, 0.0); // target is moving use only P
-
-  h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> *ws, char *data, size_t length, uWS::OpCode opCode) {
+#ifdef _MSC_VER
+  h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> *ws, char *data, size_t length, uWS::OpCode opCode)
+#else
+  h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode
+#endif
+  {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
@@ -97,19 +101,28 @@ int main()
           msgJson["throttle"] = throttleValue;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
+#ifdef _MSC_VER
           ws->send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+#else
+		  ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+#endif
         }
       } else {
         // Manual driving
         std::string msg = "42[\"manual\",{}]";
+#ifdef _MSC_VER
         ws->send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+#else
+		ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+#endif
       }
     }
   });
 
   // We don't need this since we're not using HTTP but if it's removed the program
   // doesn't compile :-(
-  h.onHttpRequest([](uWS::HttpResponse *res, uWS::HttpRequest req, char *data, size_t, size_t) {
+  h.onHttpRequest([](uWS::HttpResponse *res, uWS::HttpRequest req, char *data, size_t, size_t)
+  {
     const std::string s = "<h1>Hello world!</h1>";
     if (req.getUrl().valueLength == 1)
     {
@@ -122,6 +135,7 @@ int main()
     }
   });
 
+#ifdef _MSC_VER
   h.onConnection([&h](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req) {
     std::cout << "Connected!!!" << std::endl;
   });
@@ -134,6 +148,21 @@ int main()
   int port = 4567;
   auto host = "127.0.0.1";
   if (h.listen(host, port))
+#else
+  h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req)
+  {
+  std::cout << "Connected!!!" << std::endl;
+  });
+
+  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, char *message, size_t length)
+  {
+	  ws.close();
+	  std::cout << "Disconnected" << std::endl;
+  });
+
+  int port = 4567;
+  if (h.listen(port))
+#endif
   {
     std::cout << "Listening to port " << port << std::endl;
   }
