@@ -41,7 +41,7 @@ int main()
 #ifdef _MSC_VER
   h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> *ws, char *data, size_t length, uWS::OpCode opCode)
 #else
-  h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode
+  h.onMessage([&steerControler, &speedControler](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode)
 #endif
   {
     // "42" at the start of the message means there's a websocket message event.
